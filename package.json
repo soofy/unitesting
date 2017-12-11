@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "watch":"jest --watch js"
+    "watch": "jest --watch js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "fetch": "^1.1.0",
     "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "node-fetch": "^1.7.3"
   }
 }
