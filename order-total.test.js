@@ -6,14 +6,13 @@ const someOrder = {
  }
  
 
-it.only('Calc Tax',(done)=>{
+it.only('Calc Tax',()=>{
 
-   return  OrderTotal(()=>{return Promise.resolve({json: () => { return Promise.resolve({ rates: {standard: { value : 19} } }) } })}, {
+  return   OrderTotal(()=>{return Promise.resolve({json: () => { return Promise.resolve({ rates: {standard: { value : 19} } }) } })}, {
                 items:[
                         { prodName: 'Dragon Food', price:34 , quantity:1, tax:10}
-            ]
+                      ]
         }).then(result => expect(result).toBe(40.46))
-        done()
 })
 
 
@@ -26,7 +25,7 @@ it('Calc No Tax ',()=>{
     })
 
 
-    it.only('Calc No Tax and VAT ',(done)=>{
+    it('Calc No Tax and VAT ',(done)=>{
 
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
             let isFakeFetchedCalled = false
