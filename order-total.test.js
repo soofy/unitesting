@@ -7,12 +7,21 @@ const someOrder = {
  
 
 it.only('Calc Tax',()=>{
-
-  return   OrderTotal(()=>{return Promise.resolve({json: () => { return Promise.resolve({ rates: {standard: { value : 19} } }) } })}, {
+    let isFakeFetchedCalled = false
+    let fakeFetch  = (url) => {
+          expect(url).toBe('https://vatapi.com/v1/country-code-check?code=DE')
+          isFakeFetchedCalled = true
+         return Promise.resolve({json: () => { return Promise.resolve({ rates: {standard: { value : 19} } }) } })
+    }
+  return   OrderTotal( fakeFetch ,
+     { 
+                countryCode: 'DE',
                 items:[
                         { prodName: 'Dragon Food', price:34 , quantity:1, tax:10}
                       ]
-        }).then(result => expect(result).toBe(40.46))
+        }).then(result => { expect(result).toBe(40.46)
+                            expect(isFakeFetchedCalled).toBe(true) 
+                          })
 })
 
 
